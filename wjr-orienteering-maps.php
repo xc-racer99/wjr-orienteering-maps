@@ -1,22 +1,28 @@
 <?php
 /*
 Plugin Name: BC Orienteering Maps
-Description: Basic plugin to create a leaflet map with all the orienteering maps in BC in WJR's database - use [wjr-map] shortcode to activate it
+Description: Basic plugin to create a leaflet map with orienteering maps from WJR's database - use [wjr-map #{List of WJR Club ids}] shortcode to activate it
 Author: Jonathan Bakker
-Version: 1.0
+Version: 1.1
 */
 
 function shortcodes_init()
 {
 	function wjr_maps_shortcode($atts = [], $content = null)
 	{
- 		// do something to $content, if needed
-
 		// Enqueue the script in the footer, with leaflet dependencies
 		wp_enqueue_script('wjr-map-script', plugins_url('mapsMap.php', __FILE__), array('leaflet-base-js', 'leaflet-markercluster-script'), null, true);
 
-		// always return
-		return '<div id="mapid" style="height: 450px;"></div>';
+		// Add the mapid
+		$toreturn = '<div id="mapid" style="height: 450px;"></div>';
+
+		// Add the clubIds to an array
+		$toreturn .= '<script>var clubIds = [';
+		for($i = 0; $i < count($atts); $i++)
+			$toreturn .= $atts[$i] . ',';
+		$toreturn .= '];</script>';
+
+		return $toreturn;
 
 	}
 	add_shortcode('wjr-map', 'wjr_maps_shortcode');

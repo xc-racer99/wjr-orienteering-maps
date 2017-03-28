@@ -69,18 +69,6 @@ var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x
 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(mymap);
 
-/* Array of WhyJustRun (WJR) club id's of BC Clubs - from https://whyjustrun.ca/iof/3.0/organization_list.xml */
-var clubIds = new Array();
-clubIds.push("1"); //GVOC
-clubIds.push("43"); //VICO
-clubIds.push("42"); //SAGE
-clubIds.push("46"); //KOC
-clubIds.push("80"); //Whistler
-
-/* Do we need these?  They appear to be doubles of GVOC maps */
-//clubIds.push("90"); //OAK
-//clubIds.push("94"); //ARDF
-
 /* Create a cluster group */
 var markers = L.markerClusterGroup({
 	showCoverageOnHover: false,
