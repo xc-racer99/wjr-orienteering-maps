@@ -1,4 +1,7 @@
 <?php
+
+$relativeLocation = substr(str_replace('\\', '/', __DIR__), strlen($_SERVER['DOCUMENT_ROOT'])) . '/';
+
 $files = array();
 
 /* Make sure we're getting passed a numeric value */
@@ -10,7 +13,7 @@ if(is_numeric($_GET["mapId"])) {
 		while (false !== ($entry = readdir($handle))) {
 			if ($entry != "." && $entry != "..") {
 				if (preg_match('/.+\.png|.+\.jpg/i', $entry)) {
-					$files[] = $dir[0] . '/' . $entry;
+					$files[] = $relativeLocation . $dir[0] . '/' . $entry;
 				}
 			}
 		}

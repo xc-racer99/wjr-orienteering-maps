@@ -13,7 +13,7 @@ function shortcodes_init()
  		// do something to $content, if needed
 
 		// Enqueue the script in the footer, with leaflet dependencies
-		wp_enqueue_script('wjr-map-script', plugins_url('mapsMap.js', __FILE__), array('leaflet-base-js', 'leaflet-markercluster-script'), null, true);
+		wp_enqueue_script('wjr-map-script', plugins_url('mapsMap.php', __FILE__), array('leaflet-base-js', 'leaflet-markercluster-script'), null, true);
 
 		// always return
 		return '<div id="mapid" style="height: 450px;"></div>';
