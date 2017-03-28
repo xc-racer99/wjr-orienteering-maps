@@ -1,0 +1,27 @@
+/* Center all the content in the popup */
+.leaflet-popup-content-wrapper {
+	text-align: center;
+}
+
+.leaflet-popup-content-wrapper .holder {
+	min-width: 170px;
+    line-height: 200px;
+}
+
+.leaflet-popup-content-wrapper img {
+	vertical-align: middle;
+}
+
+.leaflet-popup-content-wrapper .arrow {
+	width: 15px;
+	height: 40px;
+	opacity: 0.5;
+}
+
+.leaflet-popup-content-wrapper .arrow:hover {
+	opacity: 1.0;
+}
+
+.leaflet-popup-content-wrapper .mainImg {
+	width: 150px;
+}
