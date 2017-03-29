@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: BC Orienteering Maps
-Description: Basic plugin to create a leaflet map with orienteering maps from WJR's database - use [wjr-map #{List of WJR Club ids}] shortcode to activate it
+Description: Basic plugin to create a leaflet map with orienteering maps from WJR's database - use [wjr-map {Comma-seperated list of WJR club IDs}] shortcode to activate it
 Author: Jonathan Bakker
 Version: 1.1
 */
@@ -16,11 +16,19 @@ function shortcodes_init()
 		// Add the mapid
 		$toreturn = '<div id="mapid" style="height: 450px;"></div>';
 
+		$toreturn .= '<script>';
 		// Add the clubIds to an array
-		$toreturn .= '<script>var clubIds = [';
-		for($i = 0; $i < count($atts); $i++)
-			$toreturn .= $atts[$i] . ',';
-		$toreturn .= '];</script>';
+		if ($atts[0]) {
+ 			$toreturn .= 'var clubIds = [';
+ 			$clubIds = explode(",", $atts[0]);
+ 			for($i = 0; $i < count($clubIds); $i++)
+				$toreturn .= $clubIds[$i] . ',';
+			$toreturn .= '];';
+ 		} else {
+ 			$toreturn .= 'var clubIds = [1, 42, 43, 46, 80];';
+		}
+
+		$toreturn .= '</script>';
 
 		return $toreturn;
 
