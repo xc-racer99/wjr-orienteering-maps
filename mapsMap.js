@@ -39,6 +39,15 @@ function switchImage(mapId, next, mapUrl) {
 	xmlhttp.send();
 }
 
+/* If the image is 100x40, then we're probably just getting the "No Map" image from WJR.  Hide it */
+function checkNoMap(img) {
+	if (img.naturalHeight == 40 && img.naturalWidth == 100) {
+		var noMap = document.createElement("p");
+		noMap.innerHTML = "No Map Image Available";
+		img.parentNode.replaceChild(noMap, img);
+	}
+}
+
 /* Hides the arrow if there's only the one image for a map */
 function hideArrows(mapId, side) {
 	var xmlhttp = new XMLHttpRequest();
@@ -102,7 +111,7 @@ for (var i = 0; i < clubIds.length; i++) {
 				var popupCode = "<h3><a href='" + allMaps.maps[i].url + "'>" + allMaps.maps[i].name + "</a></h3>";
 				popupCode += "<div class='holder'>";
 				popupCode += "<img class='arrow' id='arrowLeft" + allMaps.maps[i].id + "' src='" + scriptLocation + "arrow-left-small.png' onclick='switchImage(" + allMaps.maps[i].id + ", false, \"" + wjrImage + "\")' onload='hideArrows(" + allMaps.maps[i].id + ", \"Left\")' style='display: none;'/>";
-				popupCode += "<img class='mainImg' id='mainImg" + allMaps.maps[i].id + "' src='" + wjrImage + "' data-imgNum='0'/>";
+				popupCode += "<img class='mainImg' id='mainImg" + allMaps.maps[i].id + "' src='" + wjrImage + "' data-imgNum='0' onload='checkNoMap(this);' />";
 				popupCode += "<img class='arrow' id='arrowRight" + allMaps.maps[i].id + "' src='" + scriptLocation + "arrow-right-small.png' onclick='switchImage(" + allMaps.maps[i].id + ", true, \"" + wjrImage + "\")' onload='hideArrows(" + allMaps.maps[i].id + ", \"Right\")' style='display: none;'/>";
 				popupCode += "</div>";
 				popupCode += "<p>" + allMaps.maps[i].club.name + "</p>";
