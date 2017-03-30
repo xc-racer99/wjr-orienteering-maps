@@ -6,7 +6,7 @@ Author: Jonathan Bakker
 Version: 1.1
 */
 
-function shortcodes_init()
+function wjr_maps_shortcodes_init()
 {
 	function wjr_maps_shortcode($atts = [], $content = null)
 	{
@@ -35,7 +35,7 @@ function shortcodes_init()
 	}
 	add_shortcode('wjr-map', 'wjr_maps_shortcode');
 }
-add_action('init', 'shortcodes_init');
+add_action('init', 'wjr_maps_shortcodes_init');
 
 
 function wjr_enqueue_resources()
