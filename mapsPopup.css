@@ -5,7 +5,6 @@
 
 .leaflet-popup-content-wrapper .holder {
 	min-width: 170px;
-    line-height: 200px;
 }
 
 .leaflet-popup-content-wrapper img {
@@ -24,4 +23,10 @@
 
 .leaflet-popup-content-wrapper .mainImg {
 	width: 150px;
+}
+
+.leaflet-popup-content-wrapper h3 {
+	padding: 0px;
+	margin: 15px 0px;
+	font-size: 18px;
 }
