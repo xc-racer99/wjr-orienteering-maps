@@ -1,7 +1,3 @@
-<?php
-$server = substr(str_replace('\\', '/', __DIR__), strlen($_SERVER['DOCUMENT_ROOT']));
-?>
-
 function doSwitchImage(images, mapId, next) {
 	/* This is the image that we switch the source of */
 	var mainImage = document.getElementById("mainImg" + mapId);
@@ -39,7 +35,7 @@ function switchImage(mapId, next, mapUrl) {
 			doSwitchImage(images, mapId, next);
 		}
 	};
-	xmlhttp.open("GET", "<?php echo $server?>/readdir.php?mapId=" + mapId, true);
+	xmlhttp.open("GET", scriptLocation + "readPhotosDir.php?mapId=" + mapId, true);
 	xmlhttp.send();
 }
 
@@ -56,9 +52,21 @@ function hideArrows(mapId, side) {
 			}
 		}
 	};
-	xmlhttp.open("GET", "<?php echo $server?>/readdir.php?mapId=" + mapId, true);
+	xmlhttp.open("GET", scriptLocation + "readPhotosDir.php?mapId=" + mapId, true);
 	xmlhttp.send();
 }
+
+/* Determine the path of the script itself */
+var scriptUrl = null;
+var scripts = document.getElementsByTagName("script")
+for (var i = 0; i < scripts.length; ++i) {
+	var src = scripts[i].getAttribute('src');
+	if (src && src.match(/mapsMap/)) {
+		scriptUrl = src;
+		break;
+	}
+}
+var scriptLocation = scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1);
 
 /* Initialize map */
 var mymap = L.map('mapid').setView([54, -125], 5);
@@ -93,9 +101,9 @@ for (var i = 0; i < clubIds.length; i++) {
 
 				var popupCode = "<h3><a href='" + allMaps.maps[i].url + "'>" + allMaps.maps[i].name + "</a></h3>";
 				popupCode += "<div class='holder'>";
-				popupCode += "<img class='arrow' id='arrowLeft" + allMaps.maps[i].id + "' src='<?php echo $server?>/arrow-left-small.png' onclick='switchImage(" + allMaps.maps[i].id + ", false, \"" + wjrImage + "\")' onload='hideArrows(" + allMaps.maps[i].id + ", \"Left\")' style='display: none;'/>";
+				popupCode += "<img class='arrow' id='arrowLeft" + allMaps.maps[i].id + "' src='" + scriptLocation + "arrow-left-small.png' onclick='switchImage(" + allMaps.maps[i].id + ", false, \"" + wjrImage + "\")' onload='hideArrows(" + allMaps.maps[i].id + ", \"Left\")' style='display: none;'/>";
 				popupCode += "<img class='mainImg' id='mainImg" + allMaps.maps[i].id + "' src='" + wjrImage + "' data-imgNum='0'/>";
-				popupCode += "<img class='arrow' id='arrowRight" + allMaps.maps[i].id + "' src='<?php echo $server?>/arrow-right-small.png' onclick='switchImage(" + allMaps.maps[i].id + ", true, \"" + wjrImage + "\")' onload='hideArrows(" + allMaps.maps[i].id + ", \"Right\")' style='display: none;'/>";
+				popupCode += "<img class='arrow' id='arrowRight" + allMaps.maps[i].id + "' src='" + scriptLocation + "arrow-right-small.png' onclick='switchImage(" + allMaps.maps[i].id + ", true, \"" + wjrImage + "\")' onload='hideArrows(" + allMaps.maps[i].id + ", \"Right\")' style='display: none;'/>";
 				popupCode += "</div>";
 				popupCode += "<p>" + allMaps.maps[i].club.name + "</p>";
 

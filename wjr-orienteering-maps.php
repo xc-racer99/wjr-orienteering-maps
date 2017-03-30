@@ -11,7 +11,7 @@ function shortcodes_init()
 	function wjr_maps_shortcode($atts = [], $content = null)
 	{
 		// Enqueue the script in the footer, with leaflet dependencies
-		wp_enqueue_script('wjr-map-script', plugins_url('mapsMap.php', __FILE__), array('leaflet-base-js', 'leaflet-markercluster-script'), null, true);
+		wp_enqueue_script('wjr-map-script', plugins_url('mapsMap.js', __FILE__), array('leaflet-base-js', 'leaflet-markercluster-script'), null, true);
 
 		// Add the mapid
 		$toreturn = '<div id="mapid" style="height: 450px;"></div>';
