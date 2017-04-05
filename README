@@ -1,0 +1,4 @@
+Shortcode Usage
+[wjr-events clubIds]
+where
+	clubIds is a comma seperated list of WhyJustRun club IDs (optional, defaults to 1,42,43,46,80 which is all active BC Clubs)
