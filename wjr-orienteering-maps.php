@@ -18,12 +18,9 @@ function wjr_maps_shortcodes_init()
 
 		$toreturn .= '<script>';
 		// Add the clubIds to an array
-		if ($atts[0]) {
- 			$toreturn .= 'var clubIds = [';
- 			$clubIds = explode(",", $atts[0]);
- 			for($i = 0; $i < count($clubIds); $i++)
-				$toreturn .= $clubIds[$i] . ',';
-			$toreturn .= '];';
+		if ($atts[0] && preg_match('/\d+((,\d+)+)?/', $atts[0])) {
+			preg_match('/\d+((,\d+)+)?/', $atts[0], $matches);
+ 			$toreturn .= 'var clubIds = [' . $matches[0] . '];';
  		} else {
  			$toreturn .= 'var clubIds = [1, 42, 43, 46, 80];';
 		}
